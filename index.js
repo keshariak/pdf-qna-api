@@ -4,6 +4,7 @@ const multer = require("multer");
 const pdfParse = require("pdf-parse");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+
 const axios = require("axios");
 
 dotenv.config();
@@ -40,8 +41,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // const pdfSchema = new mongoose.Schema({ text: String });
 // const PDF = mongoose.model("PDF", pdfSchema);
-
-const mongoose = require("mongoose");
 
 const MONGO_URI = process.env.MONGO_URI; // Ensure this is correctly set
 
