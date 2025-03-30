@@ -15,7 +15,11 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 // app.use(cors());
 // OR allow specific origin
-app.use(cors({ origin: "https://pdf-qan-ui.vercel.app/" }));
+app.use(cors({ 
+  origin: "https://pdf-qan-ui.vercel.app",
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type'
+ }));
 app.use(express.json());
 
 // Multer setup for file uploads
