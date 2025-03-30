@@ -35,11 +35,58 @@ app.use(express.urlencoded({ extended: true }));
 // Multer setup for file uploads
 const upload = multer({ storage: multer.memoryStorage() });
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI);
+// // MongoDB Connection
+// mongoose.connect(process.env.MONGO_URI);
 
+// const pdfSchema = new mongoose.Schema({ text: String });
+// const PDF = mongoose.model("PDF", pdfSchema);
+
+const mongoose = require("mongoose");
+
+const MONGO_URI = process.env.MONGO_URI; // Ensure this is correctly set
+
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is not defined!");
+  process.exit(1);
+}
+
+// Connect to MongoDB with proper options
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch(err => {
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1); // Exit process if connection fails
+  });
+
+// Event listeners for better debugging
+mongoose.connection.on("error", err => console.error("❌ MongoDB Error:", err));
+mongoose.connection.on("disconnected", () => console.log("🔄 MongoDB disconnected"));
+
+// Define Schema
 const pdfSchema = new mongoose.Schema({ text: String });
 const PDF = mongoose.model("PDF", pdfSchema);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Google Gemini API Key
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
