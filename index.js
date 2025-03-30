@@ -15,12 +15,18 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 // app.use(cors());
 // OR allow specific origin
-app.use(cors({ 
-  origin: "https://pdf-qan-ui.vercel.app",
-  methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type'
- }));
+// app.use(cors({ 
+//   origin: "https://pdf-qan-ui.vercel.app",
+//   methods: 'GET,POST,PUT,DELETE',
+//   allowedHeaders: 'Content-Type'
+//  }));
+ app.use(cors({
+  origin: 'https://pdf-qan-ui.vercel.app', // Allow frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Multer setup for file uploads
 const upload = multer({ storage: multer.memoryStorage() });
